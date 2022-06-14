@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:MovieAppService/MovieAppService.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:MovieAppModel/MovieAppModel.xcodeproj">
    </FileRef>
    <FileRef
