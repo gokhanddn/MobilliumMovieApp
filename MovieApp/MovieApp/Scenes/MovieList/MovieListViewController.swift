@@ -25,13 +25,15 @@ final class MovieListViewController: BaseViewController {
     private var currentPage = 1
     
     // MARK: - Life cycle methods
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.title = ""
+        navigationController?.navigationBar.isHidden = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         loadUpcomingMovies()
     }
     
@@ -87,7 +89,9 @@ extension MovieListViewController: MovieListViewModelDelegate {
     func navigate(to route: MovieListViewRoute) {
         switch route {
         case .detail(let movieId):
-            print("detail \(movieId)")
+            if let viewController = MovieDetailBuilder.make(with: movieId) {
+                navigationController?.pushViewController(viewController, animated: true)
+            }
         }
     }
 }
