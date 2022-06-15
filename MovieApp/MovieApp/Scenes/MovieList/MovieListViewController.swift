@@ -24,6 +24,7 @@ final class MovieListViewController: BaseViewController {
     var nowPlayingMovieList: [NowPlayingMoviePresentation] = []
     var upcomingMovieList: [UpcomingMoviePresentation] = []
     private var currentPage = 1
+    let refreshControl = UIRefreshControl()
     
     // MARK: - Life cycle methods
     override func viewWillAppear(_ animated: Bool) {
@@ -43,6 +44,7 @@ final class MovieListViewController: BaseViewController {
     private func setup() {
         registerNibs()
         setDataSourcesAndDelegates()
+        initPullToRefresh()
     }
     
     private func registerNibs() {
@@ -54,6 +56,12 @@ final class MovieListViewController: BaseViewController {
     private func setDataSourcesAndDelegates() {
         tableViewMovie.dataSource = self
         tableViewMovie.delegate = self
+    }
+    
+    private func initPullToRefresh() {
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        tableViewMovie.addSubview(refreshControl)
     }
     
     // MARK: - Methods
@@ -70,6 +78,11 @@ final class MovieListViewController: BaseViewController {
     }
     
     // MARK: - Selectors
+    @objc func refresh(_ sender: AnyObject) {
+        currentPage = 1
+        loadUpcomingMovies()
+    }
+    
     @objc func loadMoreTapped(sender: UIButton) {
         sender.isHidden = true
         currentPage += 1
@@ -90,6 +103,7 @@ extension MovieListViewController: MovieListViewModelDelegate {
             }
         case .showUpcomingMovieList(let movies):
             DispatchQueue.main.async {
+                self.refreshControl.endRefreshing()
                 self.upcomingMovieList = movies
                 self.reloadTableView()
             }

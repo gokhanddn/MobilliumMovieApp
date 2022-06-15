@@ -51,6 +51,10 @@ final class MovieListViewModel: MovieListViewModelProtocol {
             Constants.ParameterKeys.page: page
         ]
         
+        if page == 1 {
+            upcomingMovieList.removeAll()
+        }
+        
         service.getUpcomingMovies(parameters: params) { [weak self] resp in
             guard let self = self else { return }
             
