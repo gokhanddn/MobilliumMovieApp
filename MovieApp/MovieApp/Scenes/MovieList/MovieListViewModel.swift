@@ -24,7 +24,7 @@ final class MovieListViewModel: MovieListViewModelProtocol {
     }
     
     // MARK: Protocol Methods
-    func load(in page: Int) {
+    func loadUpcomingMovies(in page: Int) {
         notify(.setLoading(true))
         
         let params: Parameters = [

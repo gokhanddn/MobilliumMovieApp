@@ -40,6 +40,10 @@
 		C0B136AD28597511006D1CD5 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B136AC28597511006D1CD5 /* Util.swift */; };
 		C0B136AF285975AB006D1CD5 /* UpcomingMoviePresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B136AE285975AB006D1CD5 /* UpcomingMoviePresentation.swift */; };
 		C0B136B128597613006D1CD5 /* UpcomingMoviePresentation+Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B136B028597613006D1CD5 /* UpcomingMoviePresentation+Model.swift */; };
+		C0B136B328597CEA006D1CD5 /* LoadingMoreFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B136B228597CEA006D1CD5 /* LoadingMoreFooterView.swift */; };
+		C0B136B528597D24006D1CD5 /* LoadingMoreFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0B136B428597D24006D1CD5 /* LoadingMoreFooterView.xib */; };
+		C0B136B828597D71006D1CD5 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B136B628597D71006D1CD5 /* MovieCell.swift */; };
+		C0B136B928597D71006D1CD5 /* MovieCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0B136B728597D71006D1CD5 /* MovieCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +128,10 @@
 		C0B136AC28597511006D1CD5 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		C0B136AE285975AB006D1CD5 /* UpcomingMoviePresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingMoviePresentation.swift; sourceTree = "<group>"; };
 		C0B136B028597613006D1CD5 /* UpcomingMoviePresentation+Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UpcomingMoviePresentation+Model.swift"; sourceTree = "<group>"; };
+		C0B136B228597CEA006D1CD5 /* LoadingMoreFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingMoreFooterView.swift; sourceTree = "<group>"; };
+		C0B136B428597D24006D1CD5 /* LoadingMoreFooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingMoreFooterView.xib; sourceTree = "<group>"; };
+		C0B136B628597D71006D1CD5 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
+		C0B136B728597D71006D1CD5 /* MovieCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -270,6 +278,10 @@
 		C0B1368A285970D3006D1CD5 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				C0B136B628597D71006D1CD5 /* MovieCell.swift */,
+				C0B136B728597D71006D1CD5 /* MovieCell.xib */,
+				C0B136B228597CEA006D1CD5 /* LoadingMoreFooterView.swift */,
+				C0B136B428597D24006D1CD5 /* LoadingMoreFooterView.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -444,6 +456,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0B136B928597D71006D1CD5 /* MovieCell.xib in Resources */,
+				C0B136B528597D24006D1CD5 /* LoadingMoreFooterView.xib in Resources */,
 				C0B136A12859720A006D1CD5 /* MovieDetail.storyboard in Resources */,
 				C0B1369528597130006D1CD5 /* MovieList.storyboard in Resources */,
 				C007CD98285921CB008517DB /* LaunchScreen.storyboard in Resources */,
@@ -484,6 +498,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0B1368D285970FC006D1CD5 /* MovieListContracts.swift in Sources */,
+				C0B136B328597CEA006D1CD5 /* LoadingMoreFooterView.swift in Sources */,
 				C0B13689285970B8006D1CD5 /* BaseViewController.swift in Sources */,
 				C0B136A62859739D006D1CD5 /* NowPlayingMoviePresentation.swift in Sources */,
 				C0B1369B285971E9006D1CD5 /* MovieDetailBuilder.swift in Sources */,
@@ -496,6 +511,7 @@
 				C007CD8C285921C9008517DB /* AppDelegate.swift in Sources */,
 				C0B1368F28597107006D1CD5 /* MovieListBuilder.swift in Sources */,
 				C007CD8E285921C9008517DB /* SceneDelegate.swift in Sources */,
+				C0B136B828597D71006D1CD5 /* MovieCell.swift in Sources */,
 				C0B136A8285973F6006D1CD5 /* NowPlayingMoviePresentation+Model.swift in Sources */,
 				C0B13699285971DC006D1CD5 /* MovieDetailContracts.swift in Sources */,
 				C0B1368428596FEE006D1CD5 /* AppContainer.swift in Sources */,

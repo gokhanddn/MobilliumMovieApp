@@ -10,7 +10,7 @@ import MovieAppModel
 
 protocol MovieListViewModelProtocol {
     var delegate: MovieListViewModelDelegate? { get set }
-    func load(in page: Int)
+    func loadUpcomingMovies(in page: Int)
     func selectMovie(at index: Int)
     func isLoadingMoreVisible() -> Bool
 }

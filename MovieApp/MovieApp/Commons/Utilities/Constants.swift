@@ -18,4 +18,10 @@ final class Constants {
     struct ParameterKeys {
         static let page = "page"
     }
+    
+    // MARK: - ReuseIdentifiers
+    struct ReuseIdentifiers {
+        static let movieCell = "MovieCell"
+        static let loadingMore = "LoadingMoreFooterView"
+    }
 }
