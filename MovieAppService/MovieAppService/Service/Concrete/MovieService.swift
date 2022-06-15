@@ -47,4 +47,18 @@ public class MovieService: BaseService, MovieServiceProtocol {
             }
         }
     }
+    
+    public func getMovieDetail(movieId: Int, completion: @escaping CallbackResponse<MovieDetailResponse>) {
+        var dataRequest = DataRequest(urlString: ApiHost.production.rawValue, path: .movie, version: .v3)
+        dataRequest.method = .get
+        
+        networking.request(with: dataRequest.getUrlRequest(with: "\(movieId)")) { (result: Result<MovieDetailResponse>) in
+            switch result {
+            case .success(let response):
+                completion(response)
+            case .failure(_):
+                completion(nil)
+            }
+        }
+    }
 }
