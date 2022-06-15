@@ -16,7 +16,7 @@ final class AppRouter {
     }
     
     func start(with scene: UIWindowScene) {
-        let viewController = UIViewController()
+        let viewController = MovieListBuilder.make()
         self.window.rootViewController = viewController
         window.makeKeyAndVisible()
         window.windowScene = scene

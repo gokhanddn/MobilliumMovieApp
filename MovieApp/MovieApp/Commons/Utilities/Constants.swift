@@ -9,8 +9,13 @@ import Foundation
 
 final class Constants {
     
-    // MARK: - Keys
+    // MARK: - PosterPath
     struct PosterPath {
         static let prefix = "https://image.tmdb.org/t/p/w500"
+    }
+    
+    // MARK: - ParameterKeys
+    struct ParameterKeys {
+        static let page = "page"
     }
 }

@@ -16,7 +16,6 @@ protocol MovieListViewModelProtocol {
 }
 
 enum MovieListViewModelOutput: Equatable {
-    case updateTitle(String)
     case setLoading(Bool)
     case showNowPlayingMovieList([NowPlayingMoviePresentation])
     case showUpcomingMovieList([UpcomingMoviePresentation])
