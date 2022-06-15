@@ -10,7 +10,7 @@ import Core
 import MovieAppModel
 
 public protocol MovieServiceProtocol {
-    func getNowPlayingMovies(parameters: Parameters, completion: @escaping CallbackResponse<MovieResponse>)
+    func getNowPlayingMovies(completion: @escaping CallbackResponse<MovieResponse>)
     func getUpcomingMovies(parameters: Parameters, completion: @escaping CallbackResponse<MovieResponse>)
     func getMovieDetail(movieId: Int, completion: @escaping CallbackResponse<MovieDetailResponse>)
 }

@@ -23,5 +23,7 @@ final class Constants {
     struct ReuseIdentifiers {
         static let movieCell = "MovieCell"
         static let loadingMore = "LoadingMoreFooterView"
+        static let sliderHeaderView = "SliderHeaderView"
+        static let sliderCell = "SliderCell"
     }
 }

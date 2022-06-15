@@ -15,7 +15,8 @@ final class MovieListViewModel: MovieListViewModelProtocol {
     // MARK: - Properties
     var delegate: MovieListViewModelDelegate?
     private let service: MovieServiceProtocol
-    private var movieList: [MovieResultModel] = []
+    private var nowPlayingMovieList: [MovieResultModel] = []
+    private var upcomingMovieList: [MovieResultModel] = []
     private var totalResult: Int = 0
     
     // MARK: - Init
@@ -24,6 +25,25 @@ final class MovieListViewModel: MovieListViewModelProtocol {
     }
     
     // MARK: Protocol Methods
+    func loadNowPlayingMovies() {
+        notify(.setLoading(true))
+        
+        service.getNowPlayingMovies { [weak self] resp in
+            guard let self = self else { return }
+            
+            self.notify(.setLoading(false))
+            
+            if let resp = resp {
+               if let movies = resp.results {
+                   self.nowPlayingMovieList.append(contentsOf: movies.shuffled().prefix(5))
+               }
+            }
+            
+            let presenatations = self.nowPlayingMovieList.map({ NowPlayingMoviePresentation(movie: $0) })
+            self.notify(.showNowPlayingMovieList(presenatations))
+        }
+    }
+    
     func loadUpcomingMovies(in page: Int) {
         notify(.setLoading(true))
         
@@ -39,24 +59,24 @@ final class MovieListViewModel: MovieListViewModelProtocol {
             if let resp = resp {
                if let movies = resp.results {
                    self.totalResult = resp.totalResults ?? 0
-                   self.movieList.append(contentsOf: movies)
+                   self.upcomingMovieList.append(contentsOf: movies)
                }
             } else {
-                self.totalResult = self.movieList.count
+                self.totalResult = self.upcomingMovieList.count
             }
             
-            let presenatations = self.movieList.map({ UpcomingMoviePresentation(movie: $0) })
+            let presenatations = self.upcomingMovieList.map({ UpcomingMoviePresentation(movie: $0) })
             self.notify(.showUpcomingMovieList(presenatations))
         }
     }
     
     func selectMovie(at index: Int) {
-        let movie = movieList[index]
+        let movie = upcomingMovieList[index]
         delegate?.navigate(to: .detail(movie.id ?? 0))
     }
     
     func isLoadingMoreVisible() -> Bool {
-        return !movieList.isEmpty && movieList.count < totalResult
+        return !upcomingMovieList.isEmpty && upcomingMovieList.count < totalResult
     }
     
     // MARK: Private Methods

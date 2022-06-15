@@ -16,11 +16,10 @@ public class MovieService: BaseService, MovieServiceProtocol {
         super.init()
     }
     
-    public func getNowPlayingMovies(parameters: Parameters, completion: @escaping CallbackResponse<MovieResponse>) {
+    public func getNowPlayingMovies(completion: @escaping CallbackResponse<MovieResponse>) {
         
         var dataRequest = DataRequest(urlString: ApiHost.production.rawValue, path: .movie, version: .v3)
         dataRequest.method = .get
-        dataRequest.params = parameters
         
         networking.request(with: dataRequest.getUrlRequest(with: "now_playing")) { (result: Result<MovieResponse>) in
             switch result {

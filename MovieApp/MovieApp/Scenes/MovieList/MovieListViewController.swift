@@ -21,6 +21,7 @@ final class MovieListViewController: BaseViewController {
     }
     
     /// Variables
+    var nowPlayingMovieList: [NowPlayingMoviePresentation] = []
     var upcomingMovieList: [UpcomingMoviePresentation] = []
     private var currentPage = 1
     
@@ -34,6 +35,7 @@ final class MovieListViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        loadNowPlayingMovies()
         loadUpcomingMovies()
     }
     
@@ -46,6 +48,7 @@ final class MovieListViewController: BaseViewController {
     private func registerNibs() {
         tableViewMovie.register(UINib(nibName: Constants.ReuseIdentifiers.movieCell, bundle: nil), forCellReuseIdentifier: Constants.ReuseIdentifiers.movieCell)
         tableViewMovie.register(UINib(nibName: Constants.ReuseIdentifiers.loadingMore, bundle: nil), forHeaderFooterViewReuseIdentifier: Constants.ReuseIdentifiers.loadingMore)
+        tableViewMovie.register(UINib(nibName: Constants.ReuseIdentifiers.sliderHeaderView, bundle: nil), forHeaderFooterViewReuseIdentifier: Constants.ReuseIdentifiers.sliderHeaderView)
     }
     
     private func setDataSourcesAndDelegates() {
@@ -54,6 +57,10 @@ final class MovieListViewController: BaseViewController {
     }
     
     // MARK: - Methods
+    private func loadNowPlayingMovies() {
+        viewModel?.loadNowPlayingMovies()
+    }
+    
     private func loadUpcomingMovies() {
         viewModel?.loadUpcomingMovies(in: currentPage)
     }
@@ -76,8 +83,11 @@ extension MovieListViewController: MovieListViewModelDelegate {
         switch output {
         case .setLoading(let isLoading):
             print("isLoading \(isLoading)")
-        case .showNowPlayingMovieList(let nowPlayingMovieList):
-            print("nowPlayingMovieList \(nowPlayingMovieList)")
+        case .showNowPlayingMovieList(let movies):
+            DispatchQueue.main.async {
+                self.nowPlayingMovieList = movies
+                self.reloadTableView()
+            }
         case .showUpcomingMovieList(let movies):
             DispatchQueue.main.async {
                 self.upcomingMovieList = movies
@@ -115,6 +125,12 @@ extension MovieListViewController: UITableViewDelegate {
         viewModel?.selectMovie(at: indexPath.row)
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: Constants.ReuseIdentifiers.sliderHeaderView) as? SliderHeaderView
+        headerView?.movieList = nowPlayingMovieList
+        return headerView
+    }
+    
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if viewModel?.isLoadingMoreVisible() ?? false {
             let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: Constants.ReuseIdentifiers.loadingMore) as? LoadingMoreFooterView
@@ -124,6 +140,10 @@ extension MovieListViewController: UITableViewDelegate {
             return footerView
         }
         return nil
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 256
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
